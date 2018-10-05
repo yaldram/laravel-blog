@@ -16,6 +16,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
     <!-- Bootstrap Core Css -->
     <link href="{{ asset('assets/backend/plugins/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
@@ -96,32 +97,26 @@
     <!-- Waves Effect Plugin Js -->
     <script src="{{ asset('assets/backend/plugins/node-waves/waves.js') }}"></script>
 
-    <!-- Jquery CountTo Plugin Js -->
-    <script src="{{ asset('assets/backend/plugins/jquery-countto/jquery.countTo.js') }}"></script>
-
-    <!-- Morris Plugin Js -->
-    <script src="{{ asset('assets/backend/plugins/raphael/raphael.min.js') }}"></script>
-    <script src="{{ asset('assets/backend/plugins/morrisjs/morris.js') }}"></script>
-
-{{--     
-    <script src="plugins/chartjs/Chart.bundle.js"></script>
-
-    
-    <script src="plugins/flot-charts/jquery.flot.js"></script>
-    <script src="plugins/flot-charts/jquery.flot.resize.js"></script>
-    <script src="plugins/flot-charts/jquery.flot.pie.js"></script>
-    <script src="plugins/flot-charts/jquery.flot.categories.js"></script>
-    <script src="plugins/flot-charts/jquery.flot.time.js"></script>
-
-    
-    <script src="plugins/jquery-sparkline/jquery.sparkline.js"></script> --}}
-
     <!-- Custom Js -->
     <script src="{{ asset('assets/backend/js/admin.js') }}"></script>
-   {{--  <script src="{{ asset('assets/backend/js/pages/index.js') }}"></script> --}}
 
     <!-- Demo Js -->
     <script src="{{ asset('assets/backend/js/demo.js') }}"></script>
+
+    <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
+    {!!  Toastr::message() !!}
+
+    <script>
+        @if($errors)
+            @foreach($errors->all() as $error)
+                toastr.error('{{ $error }}', 'Error', {
+                    closeButton: true,
+                    progressBar: true
+                }); 
+            @endforeach    
+        @endif
+    </script>
 
     @stack('js')
 

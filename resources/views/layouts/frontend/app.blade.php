@@ -10,6 +10,8 @@
     <title>@yield('title') -> 
     {{ config('app.name', 'Laravel') }}</title>
 
+     <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
     <!-- Font -->
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
@@ -41,6 +43,10 @@
     <script src="{{ asset('assets/frontend/js/swiper.js') }}"></script>
 
     <script src="{{ asset('assets/frontend/js/scripts.js') }}"></script>
+
+    <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
+    {!!  Toastr::message() !!}
 
     @stack('js')
 
