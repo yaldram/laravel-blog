@@ -21,6 +21,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('tags', 'TagsController');
     Route::resource('category', 'CategoryController');
+    Route::resource('post', 'PostsController');
 });
 
 Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'author', 'middleware' => ['auth', 'author']], function(){
