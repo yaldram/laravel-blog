@@ -70,7 +70,7 @@
 												<i class="material-icons">edit</i>
 											</a>
 
-											<button class="btn btn-danger waves-effect" onclick="deleteTag({{ $category->id }})"><i class="material-icons">delete</i></button>
+											<button class="btn btn-danger waves-effect" onclick="deleteCategory({{ $category->id }})"><i class="material-icons">delete</i></button>
 											<form id="delete-form-{{ $category->id }}" action="{{ route('admin.category.destroy', $category->id) }}" method="POST" style="display: none"
 													
 												>
@@ -106,7 +106,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.4/dist/sweetalert2.all.min.js"></script>
 	
 	<script type="text/javascript">
-		function deleteTag(id) {
+		function deleteCategory(id) {
 			const swalWithBootstrapButtons = swal.mixin({
 			  confirmButtonClass: 'btn btn-success',
 			  cancelButtonClass: 'btn btn-danger',
