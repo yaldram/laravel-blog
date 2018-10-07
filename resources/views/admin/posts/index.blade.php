@@ -136,7 +136,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.4/dist/sweetalert2.all.min.js"></script>
 	
 	<script type="text/javascript">
-		function deleteCategory(id) {
+		function deletePost(id) {
 			const swalWithBootstrapButtons = swal.mixin({
 			  confirmButtonClass: 'btn btn-success',
 			  cancelButtonClass: 'btn btn-danger',
