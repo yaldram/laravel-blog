@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Author;
 
 use App\Post;
 use Illuminate\Http\Request;
@@ -15,7 +15,6 @@ use Brian2694\Toastr\Facades\Toastr;
 use App\Category;
 use App\Tag;
 
-
 class PostsController extends Controller
 {
     /**
@@ -25,8 +24,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->get();
-        return view('admin.posts.index', compact('posts'));
+        $posts = Auth::User()->posts()->latest()->get();
+        return view('author.posts.index', compact('posts'));
     }
 
     /**
@@ -35,10 +34,10 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {  
         $categories = Category::all();
         $tags = Tag::all();
-        return view('admin.posts.create', compact('categories', 'tags'));
+        return view('author.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -49,7 +48,7 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-       $this->validate($request, [
+         $this->validate($request, [
             'title' => 'required',
             'image' => 'required|mimes:jpeg,bmp,png,jpg',
             'categories' => 'required',
@@ -89,7 +88,7 @@ class PostsController extends Controller
             $post->status = false;
        }
 
-       $post->is_approved = true;
+       $post->is_approved = false;
        $post->save();
 
        //Relationships
@@ -97,7 +96,7 @@ class PostsController extends Controller
        $post->tags()->attach($request->tags);
 
        Toastr::success('Post Saved Successfully :)', 'success');
-       return redirect()->route('admin.post.index');
+       return redirect()->route('author.post.index');
 
     }
 
@@ -109,7 +108,7 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-      return view('admin.posts.show', compact('post'));
+        return view('author.posts.show', compact('post'));
     }
 
     /**
@@ -122,7 +121,7 @@ class PostsController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
-        return view('admin.posts.edit', compact('post','categories', 'tags'));
+        return view('author.posts.edit', compact('post','categories', 'tags'));
     }
 
     /**
@@ -134,7 +133,7 @@ class PostsController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-       $this->validate($request, [
+        $this->validate($request, [
             'title' => 'required',
             'image' => 'image',
             'categories' => 'required',
@@ -179,7 +178,7 @@ class PostsController extends Controller
             $post->status = false;
        }
 
-       $post->is_approved = true;
+       $post->is_approved = false;
        $post->save();
 
        //Relationships
@@ -187,7 +186,7 @@ class PostsController extends Controller
        $post->tags()->sync($request->tags);
 
        Toastr::success('Post Updated Successfully :)', 'success');
-       return redirect()->route('admin.post.index');
+       return redirect()->route('author.post.index');
 
     }
 
@@ -201,7 +200,7 @@ class PostsController extends Controller
     {
         if(Storage::disk('public')->exists('post/'.$post->image))
         {
-        	Storage::disk('public')->delete('post/'.$post->image);
+            Storage::disk('public')->delete('post/'.$post->image);
         }
 
         $post->categories()->detach();
