@@ -120,7 +120,9 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post','categories', 'tags'));
     }
 
     /**
@@ -132,7 +134,61 @@ class PostsController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+       $this->validate($request, [
+            'title' => 'required',
+            'image' => 'image',
+            'categories' => 'required',
+            'tags' => 'required',
+            'body' => 'required'
+       ]);
+
+       $image = $request->file('image');
+       $slug = str_slug($request->title);
+
+       if(isset($image)) {
+
+            $currentDate = Carbon::now()->toDateString();
+            
+            $imagename = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+
+            if(!Storage::disk('public')->exists('post')) {
+                Storage::disk('public')->makeDirectory('post');
+            }
+
+            //delete old post image
+            if(Storage::disk('public')->exists('posts/'.$post->image)) 
+            {
+              Storage::disk('public')->delete('post/'.$post->image);
+            }
+
+            $postImage = Image::make($image)->resize(1600, 1066)->save($imagename);
+            Storage::disk('public')->put('post/'.$imagename, $postImage);           
+       } else {
+            $imagename = $post->image;
+       }
+
+       $post->user_id = Auth::id();
+       $post->title = $request->title;
+       $post->slug = $slug;
+       $post->image = $imagename;
+       $post->body = $request->body;
+
+       if(isset($request->status)) {
+            $post->status = true;
+       } else {
+            $post->status = false;
+       }
+
+       $post->is_approved = true;
+       $post->save();
+
+       //Relationships
+       $post->categories()->sync($request->categories);
+       $post->tags()->sync($request->tags);
+
+       Toastr::success('Post Updated Successfully :)', 'success');
+       return redirect()->route('admin.post.index');
+
     }
 
     /**
