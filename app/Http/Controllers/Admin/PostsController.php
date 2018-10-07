@@ -5,6 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
+use Carbon\Carbon;
+use Intervention\Image\Facades\Image;
+use Brian2694\Toastr\Facades\Toastr;
+
+use App\Category;
+use App\Tag;
+
 
 class PostsController extends Controller
 {
@@ -25,8 +35,10 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -37,7 +49,56 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $this->validate($request, [
+            'title' => 'required',
+            'image' => 'required|mimes:jpeg,bmp,png,jpg',
+            'categories' => 'required',
+            'tags' => 'required',
+            'body' => 'required'
+       ]);
+
+       $image = $request->file('image');
+       $slug = str_slug($request->title);
+
+       if(isset($image)) {
+
+            $currentDate = Carbon::now()->toDateString();
+            
+            $imagename = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+
+            if(!Storage::disk('public')->exists('post')) {
+                Storage::disk('public')->makeDirectory('post');
+            }
+
+            $postImage = Image::make($image)->resize(1600, 1066)->save($imagename);
+            Storage::disk('public')->put('post/'.$imagename, $postImage);           
+       } else {
+            $imagename = 'default.png';
+       }
+
+       $post = new Post;
+       $post->user_id = Auth::id();
+       $post->title = $request->title;
+       $post->slug = $slug;
+       $post->image = $imagename;
+       $post->body = $request->body;
+
+       if(isset($request->status)) {
+            $post->status = true;
+       } else {
+            $post->status = false;
+       }
+
+       $post->is_approved = true;
+       $post->save();
+
+       //Relationships
+       $post->categories()->attach($request->categories);
+       $post->tags()->attach($request->tags);
+
+       Toastr::success('Post Saved Successfully :)', 'success');
+       return redirect()->route('admin.post.index');
+
     }
 
     /**
