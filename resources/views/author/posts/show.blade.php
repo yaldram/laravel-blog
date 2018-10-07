@@ -7,30 +7,21 @@
 @endpush
 
 @section('content')
-     <a href="{{ route('admin.post.index') }}" class="btn btn-danger waves-effect">
+     <a href="{{ route('author.post.index') }}" class="btn btn-danger waves-effect">
         <i class="material-icons">done</i>
             Back
         </a>
         
         @if($post->is_approved == false)
-            
-            <button type="button" class="btn btn-success pull-right waves-effect" onclick="approvePost({{ $post->id }})">
+            <button type="button" class="btn btn-success pull-right">
                 <i class="material-icons">done</i>
                 <span>Approve</span>
             </button>
-            
-            <form method="post" action="{{ route('admin.post.approve', $post->id) }}" style="display: none;" id="approval-form">
-                @csrf
-                @method('PUT')
-            </form>
-        
         @else 
-             
-             <button type="button" class="btn btn-success pull-right waves-effect" disabled>
+             <button type="button" class="btn btn-success pull-right" disabled>
                 <i class="material-icons">done</i>
                 <span>Approved</span>
             </button>
-       
         @endif
         
     <div class="row clearfix" style="margin-top: 15px;">
@@ -103,39 +94,5 @@
 @endsection
 
 @push('js')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.4/dist/sweetalert2.all.min.js"></script>
-    
-    <script type="text/javascript">
-        function approvePost(id) {
-            const swalWithBootstrapButtons = swal.mixin({
-              confirmButtonClass: 'btn btn-success',
-              cancelButtonClass: 'btn btn-danger',
-              buttonsStyling: false,
-            });
-
-            swalWithBootstrapButtons({
-              title: 'Are you sure?',
-              text: "You won't be able to revert this!",
-              type: 'warning',
-              showCancelButton: true,
-              confirmButtonText: 'Yes, Approve It!',
-              cancelButtonText: 'No, cancel!',
-              reverseButtons: true
-            }).then((result) => {
-              if (result.value) {
-               event.preventDefault();
-               document.getElementById('approval-form').submit();
-              } else if (
-                // Read more about handling dismissals
-                result.dismiss === swal.DismissReason.cancel
-              ) {
-                swalWithBootstrapButtons(
-                  'Cancelled',
-                  'The post remained Pending :)',
-                  'info'
-                )
-              }
-        })
-    }
-    </script>
+   
 @endpush
