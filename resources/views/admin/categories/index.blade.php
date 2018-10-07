@@ -23,6 +23,9 @@
                     <div class="header">
                         <h2>
                            ALL CATEGORIES
+                           <span class="badge bg-blue">
+                               {{ $categories->count() }}
+                           </span>
                         </h2>
                         <ul class="header-dropdown m-r--5">
                             <li class="dropdown">
@@ -44,6 +47,7 @@
                                     <tr>
                                     	<th>NO.</th>
                                         <th>Name</th>
+                                        <th>Posts Count</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>Actions</th>
@@ -53,6 +57,7 @@
                                     <tr>
                                     	<th>NO.</th>
                                         <th>Name</th>
+                                        <th>Posts Count</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>Actions</th>
@@ -63,6 +68,7 @@
 									<tr>
 										<td>{{ $key + 1 }}</td>
 										<td>{{ $category->name }}</td>
+                                        <td>{{ $category->posts->count() }}</td>
 										<td>{{ $category->created_at }}</td>
 										<td>{{ $category->updated_at }}</td>
 										<td class="text-center">
