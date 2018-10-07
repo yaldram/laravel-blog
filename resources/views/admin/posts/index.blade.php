@@ -93,6 +93,10 @@
                                         <td>{{ $post->created_at }}</td>
                                         <td>{{ $post->updated_at }}</td>
 										<td class="text-center">
+                                            <a href="{{ route('admin.post.show', $post->id) }}" class="btn btn-success waves-effect">
+                                                <i class="material-icons">visibility</i>
+                                            </a>
+
 											<a href="{{ route('admin.post.edit', $post->id) }}" class="btn btn-info waves-effect">
 												<i class="material-icons">edit</i>
 											</a>
@@ -132,7 +136,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.4/dist/sweetalert2.all.min.js"></script>
 	
 	<script type="text/javascript">
-		function deleteCategory(id) {
+		function deletePost(id) {
 			const swalWithBootstrapButtons = swal.mixin({
 			  confirmButtonClass: 'btn btn-success',
 			  cancelButtonClass: 'btn btn-danger',
