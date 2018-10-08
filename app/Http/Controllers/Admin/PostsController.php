@@ -16,8 +16,10 @@ use Brian2694\Toastr\Facades\Toastr;
 use App\Post;
 use App\Category;
 use App\Tag;
+use App\Subscriber;
 
 use App\Notifications\AuthorPostApproved;
+use App\Notifications\NewPostNotify;
 
 class PostsController extends Controller
 {
@@ -98,6 +100,12 @@ class PostsController extends Controller
        //Relationships
        $post->categories()->attach($request->categories);
        $post->tags()->attach($request->tags);
+
+       $subscribers = Subscriber::all();
+       foreach($subscribers as $subscriber) {
+           Notification::route('mail', $subscriber->email)
+            ->notify(new NewPostNotify($post));
+       }
 
        Toastr::success('Post Saved Successfully :)', 'success');
        return redirect()->route('admin.post.index');
