@@ -37,6 +37,11 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
 });
 
 Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'author', 'middleware' => ['auth', 'author']], function(){
+
+    Route::get('settings', 'SettingsController@index')->name('settings');
+    Route::put('profile-update', 'SettingsController@updateProfile')->name('profile.update');
+    Route::put('password-update', 'SettingsController@updatePassword')->name('password.update');
+
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('post', 'PostsController');
 });
