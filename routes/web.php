@@ -11,16 +11,19 @@
 |
 */
 
-Route::get('/blog', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/blog', 'HomeController@index')->name('home');
 
 Auth::routes();
 
 Route::post('/subscriber', 'SubscriberController@store')->name('subscriber.store');
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'middleware' => ['auth', 'admin']], function() {
-    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+    Route::get('settings', 'SettingsController@index')->name('settings');
+    Route::put('profile-update', 'SettingsController@updateProfile')->name('profile.update');
+     Route::put('password-update', 'SettingsController@updatePassword')->name('password.update');
+
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('tags', 'TagsController');
     Route::resource('category', 'CategoryController');
     Route::resource('post', 'PostsController');
@@ -34,6 +37,11 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
 });
 
 Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'author', 'middleware' => ['auth', 'author']], function(){
+
+    Route::get('settings', 'SettingsController@index')->name('settings');
+    Route::put('profile-update', 'SettingsController@updateProfile')->name('profile.update');
+    Route::put('password-update', 'SettingsController@updatePassword')->name('password.update');
+
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('post', 'PostsController');
 });
