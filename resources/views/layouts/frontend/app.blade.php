@@ -48,6 +48,17 @@
 
     {!!  Toastr::message() !!}
 
+     <script>
+        @if($errors)
+            @foreach($errors->all() as $error)
+                toastr.error('{{ $error }}', 'Error', {
+                    closeButton: true,
+                    progressBar: true
+                }); 
+            @endforeach    
+        @endif
+    </script>
+
     @stack('js')
 
 </html>
