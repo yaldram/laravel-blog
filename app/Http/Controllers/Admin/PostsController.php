@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Post;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Notification;
 
 use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
 use Brian2694\Toastr\Facades\Toastr;
 
+use App\Post;
 use App\Category;
 use App\Tag;
 
+use App\Notifications\AuthorPostApproved;
 
 class PostsController extends Controller
 {
@@ -203,6 +206,10 @@ class PostsController extends Controller
       if($post->is_approved == false) {
         $post->is_approved = true;
         $post->save();
+
+        //Send notification to author
+        $post->user->notify(new AuthorPostApproved($post));
+
         Toastr::success('Post Successfully Approved :)', 'success');
       } else {
         Toastr::info('Post has already been approved :)', 'Info');

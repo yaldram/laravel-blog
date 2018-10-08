@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Notification;
 
 use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
@@ -14,6 +15,9 @@ use Brian2694\Toastr\Facades\Toastr;
 
 use App\Category;
 use App\Tag;
+use App\User;
+
+use App\Notifications\NewAuthorPost;
 
 class PostsController extends Controller
 {
@@ -94,6 +98,10 @@ class PostsController extends Controller
        //Relationships
        $post->categories()->attach($request->categories);
        $post->tags()->attach($request->tags);
+
+       //Sending Notifications
+       $admin_users = User::where('role_id', '1')->get();
+       Notification::send($admin_users, new NewAuthorPost($post));
 
        Toastr::success('Post Saved Successfully :)', 'success');
        return redirect()->route('author.post.index');
