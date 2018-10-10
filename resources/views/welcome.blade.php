@@ -56,7 +56,9 @@
                         <div class="single-post post-style-1">
 
                             <div class="blog-image">
+                                <a href="{{ route('post.details', $post->slug) }}">
                                 <img src="{{ Storage::disk('public')->url('post/'.$post->image) }}" alt="{{ $post->title }}">
+                                 </a>
                             </div>
 
                             <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$post->user->image) }}" alt="Profile Image"></a>
@@ -64,7 +66,7 @@
                             <div class="blog-info">
 
                                 <h4 class="title">
-                                    <a href="#">
+                                    <a href="{{ route('post.details', $post->slug) }}">
                                     <b>{{ $post->title }}</b>
                                     </a>
                                 </h4>
