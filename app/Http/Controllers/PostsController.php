@@ -25,7 +25,7 @@ class PostsController extends Controller
     		Session::put($blogKey, 1);
     	}
     	
-    	$randomposts = Post::all()->random(3);
+    	$randomposts = Post::all()->random(1);
     	return view('post', compact('post', 'randomposts'));
     }
 }
