@@ -13,6 +13,8 @@
 
 Route::get('/blog', 'HomeController@index')->name('home');
 
+Route::get('/post/{slug}', 'PostsController@details')->name('post.details');
+
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
