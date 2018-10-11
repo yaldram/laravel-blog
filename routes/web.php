@@ -19,6 +19,8 @@ Route::get('/post/{slug}', 'PostsController@details')->name('post.details');
 
 Route::get('/category/{slug}', 'PostsController@postsByCategory')->name('category.posts');
 
+Route::get('/tag/{slug}', 'PostsController@postsByTag')->name('tag.posts');
+
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 
 use App\Post;
 use App\Category;
+use App\Tag;
 
 class PostsController extends Controller
 {
@@ -33,5 +34,10 @@ class PostsController extends Controller
     public function postsByCategory($slug) {
         $category = Category::where('slug', $slug)->first();
         return view('category', compact('category'));
+    }
+
+    public function postsByTag($slug) {
+        $tag = Tag::where('slug', $slug)->first();
+        return view('tag', compact('tag'));
     }
 }
