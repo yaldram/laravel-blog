@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 use App\Post;
+use App\Category;
 
 class PostsController extends Controller
 {
@@ -27,5 +28,10 @@ class PostsController extends Controller
     	
     	$randomposts = Post::all()->random(1);
     	return view('post', compact('post', 'randomposts'));
+    }
+
+    public function postsByCategory($slug) {
+        $category = Category::where('slug', $slug)->first();
+        return view('category', compact('category'));
     }
 }
