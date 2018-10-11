@@ -12,12 +12,12 @@ use App\Tag;
 class PostsController extends Controller
 {
 	public function index() {
-		$posts = Post::latest()->paginate(6);
+		$posts = Post::latest()->approved()->published()->paginate(6);
 		return view('posts', compact('posts'));
 	}
 
     public function details($slug) {
-    	$post = Post::where('slug', $slug)->first();
+    	$post = Post::where('slug', $slug)->approved()->published()->first();
 
     	$blogKey ='blog_' .$post->id;
     	
@@ -27,17 +27,20 @@ class PostsController extends Controller
     		Session::put($blogKey, 1);
     	}
     	
-    	$randomposts = Post::all()->random(1);
+    	$randomposts = Post::approved()->published()->take(3)->inRandomOrder(1);
+
     	return view('post', compact('post', 'randomposts'));
     }
 
     public function postsByCategory($slug) {
         $category = Category::where('slug', $slug)->first();
-        return view('category', compact('category'));
+        $posts = $category->posts()->approved()->published()->get();
+        return view('category', compact('category', 'posts'));
     }
 
     public function postsByTag($slug) {
         $tag = Tag::where('slug', $slug)->first();
-        return view('tag', compact('tag'));
+         $posts = $tag->posts()->approved()->published()->get();
+        return view('tag', compact('tag', 'posts'));
     }
 }

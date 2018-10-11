@@ -70,3 +70,8 @@ Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'author', 
     Route::get('/comments', 'CommentsController@index')->name('comments.index');
     Route::delete('/comments/{id}', 'CommentsController@destroy')->name('comments.destroy');
 });
+
+View::composer('layouts.frontend.partials.footer', function($view) {
+    $categories = App\Category::all();
+    $view->with('categories', $categories);
+});
