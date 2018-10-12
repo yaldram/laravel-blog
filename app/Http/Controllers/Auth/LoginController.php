@@ -46,8 +46,6 @@ class LoginController extends Controller
         } else if($user->role->id == 2) {
             return redirect()->route('author.dashboard');
         }
-
-        return redirect('/home');
     }
 
      public function logout(Request $request) {
