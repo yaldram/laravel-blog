@@ -21,6 +21,10 @@ Route::get('/category/{slug}', 'PostsController@postsByCategory')->name('categor
 
 Route::get('/tag/{slug}', 'PostsController@postsByTag')->name('tag.posts');
 
+Route::post('/subscriber', 'SubscriberController@store')->name('subscriber.store');
+
+Route::get('/search', 'SearchController@search')->name('search');
+
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
@@ -29,8 +33,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('comment/{post}', 'CommentsController@store')->name('comments.store');
     
 });
-
-Route::post('/subscriber', 'SubscriberController@store')->name('subscriber.store');
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'middleware' => ['auth', 'admin']], function() {
 
