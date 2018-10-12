@@ -1,11 +1,11 @@
 @extends('layouts.frontend.app')
 
-@section('title', 'Posts')
+@section('title', 'Profile')
 
 @push('css')
-	<link href="{{ asset('assets/frontend/css/category/styles.css') }}" rel="stylesheet">
+	<link href="{{ asset('assets/frontend/css/profile/styles.css') }}" rel="stylesheet">
 
-	<link href="{{ asset('assets/frontend/css/category/responsive.css') }}" rel="stylesheet">
+	<link href="{{ asset('assets/frontend/css/profile/responsive.css') }}" rel="stylesheet">
 	
 	 <style>
         .favorite_posts {
@@ -17,32 +17,35 @@
 
 @section('content')
 	<div class="slider display-table center-text">
-		<h1 class="title display-table-cell"><b>ALL POSTS</b></h1>
+		<h1 class="title display-table-cell"><b>{{ $author->name }}</b></h1>
 	</div><!-- slider -->
 
 	<section class="blog-area section">
 		<div class="container">
 
 			<div class="row">
-				
-				@foreach($posts as $post)
-				<div class="col-lg-4 col-md-6">
-					<div class="card h-100">
-						<div class="single-post post-style-1">
 
+				<div class="col-lg-8 col-md-12">
+					<div class="row">
+						@if($posts->count() > 0)
+						@foreach($posts as $post)
+						<div class="col-md-6 col-sm-12">
+							<div class="card h-100">
+								<div class="single-post post-style-1">
 							<div class="blog-image"><img src="{{  Storage::disk('public')->url('post/'.$post->image) }}" alt="Blog Image"></div>
 
 							<a class="avatar" href="{{ route('author.profile', $post->user->username) }}"><img src="{{ Storage::disk('public')->url('profile/'.$post->user->image) }}" alt="Profile Image"></a>
 
-							<div class="blog-info">
+									<div class="blog-info">
 
+									
 								<h4 class="title">
 									<a href="{{ route('post.details', $post->slug) }}">
 										<b>{{ $post->title }}</b>
 									</a>
 								</h4>
 
-								<ul class="post-footer">
+										<ul class="post-footer">
 								<li>
                                 @guest
                                 <a href="javascript:void(0);" onclick="toastr.info('To add favorite list. You must first Login', 'Info', {
@@ -72,17 +75,52 @@
                                     <a href="#"><i class="ion-eye"></i>{{ $post->view_count }}</a>
                                 </li>
 								</ul>
+									</div><!-- blog-info -->
+								</div><!-- single-post -->
+							</div><!-- card -->
+						</div><!-- col-md-6 col-sm-12 -->		
+						@endforeach
+						@else 
+						<div class="col-md-6 col-sm-12">
+							<div class="card h-100">
+								<div class="single-post post-style-1">
+									<div class="blog-info">
+										<h4 class="title">
+											<strong>
+											 Sorry No Post Found :)
+											</strong>
+										</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+						@endif
 
-							</div><!-- blog-info -->
-						</div><!-- single-post -->
-					</div><!-- card -->
-				</div><!-- col-lg-4 col-md-6 -->
-				@endforeach
+					</div><!-- row -->
+
+					{{-- <a class="load-more-btn" href="#"><b>LOAD MORE</b></a>
+ --}}
+				</div><!-- col-lg-8 col-md-12 -->
+
+				<div class="col-lg-4 col-md-12 ">
+
+					<div class="single-post info-area ">
+
+						<div class="about-area">
+							<h4 class="title"><b>ABOUT AUTHOR</b></h4>
+							<p>{{ $author->name }}</p><br>
+							<p>{{ $author->about }}</p><br>
+							<strong>Author Since :- {{ $author->created_at }}</strong> <br>
+							<strong>Total Post: {{ $author->posts->count() }}</strong>
+
+						</div>
+
+
+					</div><!-- info-area -->
+
+				</div><!-- col-lg-4 col-md-12 -->
 
 			</div><!-- row -->
-
-			<!-- pagination -->
-			{{ $posts->links() }}
 
 		</div><!-- container -->
 	</section><!-- section -->

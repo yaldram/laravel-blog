@@ -25,6 +25,8 @@ Route::post('/subscriber', 'SubscriberController@store')->name('subscriber.store
 
 Route::get('/search', 'SearchController@search')->name('search');
 
+Route::get('/profile/{username}', 'AuthorController@profile')->name('author.profile');
+
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
