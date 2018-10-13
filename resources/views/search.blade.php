@@ -86,7 +86,7 @@
 						<div class="single-post post-style-1">
 							<div class="blog-info">
 								<h4 class="title">
-									<strong>Sorry, no Posts under this Category.</strong>
+									<strong>Sorry, no Posts under this Search Result.</strong>
 								</h4>
 							</div>
 						</div>
