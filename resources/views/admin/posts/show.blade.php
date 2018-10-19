@@ -94,7 +94,7 @@
                     </h2>
                 </div>
                 <div class="body">
-                  <img class="img-responsive thumbnail" src="{{ Storage::disk('public')->url('post/'. $post->image) }}" alt="Featured Image">
+                  <img class="img-responsive thumbnail" src="{{ asset('storage/post/'. $post->image) }}" alt="Featured Image">
                 </div>
             </div>
 
