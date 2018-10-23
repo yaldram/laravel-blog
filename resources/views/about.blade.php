@@ -83,7 +83,7 @@
       Let me tell you a few things...
     </h2>
     <div class="about-info">
-      <img style="height: auto; width: 100%;" src="{{ asset('yaldram.jpg') }}" alt="Arsalan Yaldram" class="bio-image">
+      <img style="height: auto; width: 100%;" src="{{ asset('yaldram.JPG') }}" alt="Arsalan Yaldram" class="bio-image">
 
       <div class="bio">
         <h3 class="text-secondary">BIO</h3>
