@@ -11,7 +11,7 @@
   <div class="container">
     <section>
       <div>
-        <div><img src="{{ asset('yaldram.jpg') }}" alt="avatar" class="avatar"></div>
+        <div><img src="{{ asset('yaldram.JPG') }}" alt="avatar" class="avatar"></div>
       </div>
       <div>
         <div class="my-name">Arsalan Yaldram</div>

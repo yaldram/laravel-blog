@@ -17,7 +17,7 @@
     .menu-branding .protrait {
       width: 250px;
       height: 250px;
-      background: url({{ asset('yaldram.jpg')  }});
+      background: url({{ asset('yaldram.JPG')  }});
       background-size: cover;
       border-radius: 50%;
       border: solid 3px #eece1a; 
@@ -25,7 +25,7 @@
 
     @media screen and (max-width: 768px) {
        .menu-branding .protrait {
-          background: url({{ asset('yaldram.jpg')  }});
+          background: url({{ asset('yaldram.JPG')  }});
           background-size: cover;
        }
       }
