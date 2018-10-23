@@ -17,14 +17,16 @@
     .menu-branding .protrait {
       width: 250px;
       height: 250px;
-      background: url({{ asset('portrait.jpg')  }});
+      background: url({{ asset('yaldram.jpg')  }});
+      background-size: cover;
       border-radius: 50%;
       border: solid 3px #eece1a; 
     }
 
     @media screen and (max-width: 768px) {
        .menu-branding .protrait {
-          background: url({{ asset('portrait.jpg')  }});
+          background: url({{ asset('yaldram.jpg')  }});
+          background-size: cover;
        }
       }
   </style>
@@ -81,33 +83,29 @@
       Let me tell you a few things...
     </h2>
     <div class="about-info">
-      <img src="{{ asset('portrait.jpg') }}" alt="John Doe" class="bio-image">
+      <img style="height: auto; width: 100%;" src="{{ asset('yaldram.jpg') }}" alt="Arsalan Yaldram" class="bio-image">
 
       <div class="bio">
         <h3 class="text-secondary">BIO</h3>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt magni nam nisi quae vitae? Quod molestiae ipsa
-          autem natus eum vel ducimus nulla harum voluptatem eligendi! Unde, reiciendis? Praesentium, laborum.</p>
+        <p>Hard-working web developer with a flair for creating elegant solutions in the least amount of time. Developed solutions in PHP, Node.js. Also intrested in History of Philosophy and Religions.</p>
       </div>
 
       <div class="job job-1">
-        <h3>123 Webshop</h3>
-        <h6>Full Stack Developer</h6>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates perferendis totam enim. Nesciunt porro dolores
-          expedita dolor necessitatibus deserunt nemo.</p>
+        <h3>PHP</h3>
+        <h6>Back End Developer</h6>
+        <p>I have worked with php since 2017 it was my first take on web development and really love working with php. Object oreiented Php really changed things around and Laravel was my choice as always for great PHP Apps.</p>
       </div>
 
       <div class="job job-2">
-        <h3>Designers ABC</h3>
-        <h6>Front End Developer</h6>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates perferendis totam enim. Nesciunt porro dolores
-          expedita dolor necessitatibus deserunt nemo.</p>
+        <h3>Node JS</h3>
+        <h6>Back End Developer</h6>
+        <p>Building Rest Apis with Node is always a task that i would take up immediately if given. Securing Rest Apis, OAuth2, file uploads, sending Email and yes Graphql. GraphQL is my love.</p>
       </div>
 
       <div class="job job-3">
-        <h3>Webworks</h3>
-        <h6>Graphic Designer</h6>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates perferendis totam enim. Nesciunt porro dolores
-          expedita dolor necessitatibus deserunt nemo.</p>
+        <h3>React-Redux-Apollo-CLient</h3>
+        <h6>Front End Developer</h6>
+        <p>On the Front i started working with React during my final year exams i used to always give some time to react even during my exam studies. React has always been my front-end choice. But i would also try Angular, Vue, HyperApp especially HyperApp in the near future.</p>
       </div>
     </div>
   </main>

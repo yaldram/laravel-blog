@@ -16,14 +16,16 @@
     .menu-branding .protrait {
       width: 250px;
       height: 250px;
-      background: url({{ asset('portrait.jpg')  }});
+      background: url({{ asset('yaldram.jpg')  }});
+      background-size: cover;
       border-radius: 50%;
       border: solid 3px #eece1a; 
     }
 
     @media screen and (max-width: 768px) {
        .menu-branding .protrait {
-          background: url({{ asset('portrait.jpg')  }});
+          background: url({{ asset('yaldram.jpg')  }});
+          background-size: cover;
        }
       }
   </style>
@@ -68,6 +70,11 @@
             Blog
           </a>
         </li>
+         <li class="nav-item">
+          <a href="{{ route('resume') }}" class="nav-link">
+            Resume
+          </a>
+        </li>
       </ul>
     </nav>
   </header>
@@ -85,10 +92,10 @@
         <span class="text-secondary">Email: </span> arsalanyaldram0211@outlook.com
       </div>
       <div>
-        <span class="text-secondary">Phone: </span> (555) 555-5555
+        <span class="text-secondary">Phone: </span> (+91) 8975044133
       </div>
       <div>
-        <span class="text-secondary">Address: </span> 50 Main st Boston MA 02101
+        <span class="text-secondary">Address: </span> Rasta Peth Pune - 411011
       </div>
     </div>
   </main>
