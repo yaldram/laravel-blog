@@ -10,7 +10,17 @@
 			<li><a href="{{ route('post.index') }}">Posts</a></li>
 			@guest
 			<li><a href="{{ route('login') }}">Login</a></li>
+			<li><a href="{{ route('register') }}">Sign Up</a></li>
 			@else
+				<li>
+				<a href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();">
+                Logout
+                </a></li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
 				@if(Auth::user()->role->id == 1)
 				<li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>		
 				@endif

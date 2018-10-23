@@ -13,14 +13,16 @@
     .menu-branding .protrait {
       width: 250px;
       height: 250px;
-      background: url({{ asset('portrait.jpg')  }});
+      background: url({{ asset('yaldram.jpg')  }});
+      background-size: cover;
       border-radius: 50%;
       border: solid 3px #eece1a; 
     }
 
     @media screen and (max-width: 768px) {
        .menu-branding .protrait {
-          background: url({{ asset('portrait.jpg')  }});
+         background: url({{ asset('yaldram.jpg')  }});
+         background-size: cover;
        }
       }
   </style>
@@ -63,6 +65,11 @@
         <li class="nav-item">
           <a href="{{ route('home') }}" class="nav-link">
             Blog
+          </a>
+        </li>
+         <li class="nav-item">
+          <a href="{{ route('resume') }}" class="nav-link">
+            Resume
           </a>
         </li>
       </ul>		</nav>
