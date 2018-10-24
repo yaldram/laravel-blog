@@ -15,6 +15,7 @@
 		.slider {
 			height: 400px;
 			width: 100%;
+			background-position: center;
 			background-image: url({{ asset('storage/category/'.$category->image)  }});
 			background-size: cover;
 		}
