@@ -13,6 +13,7 @@
 	 	.header-background {
 	 		height: 400px;
 	 		width: 100%;
+	 		background-position: center;
 	 		background-image: url({{ asset('storage/post/'.$post->image ) }});
 	 		background-size: cover;
 	 	}
