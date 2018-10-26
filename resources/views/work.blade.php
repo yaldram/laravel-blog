@@ -164,7 +164,7 @@
         <a href="#!">
           <img height="250px" src="{{ asset('projects/sequelize.png') }}" alt="Project">
         </a>
-        <a href="https://sequelize-api-async-await.herokuapp.com" class="btn-light">
+        <a href="https://sequelize-api-async-await.herokuapp.com/api/posts/list" class="btn-light">
           <i class="fas fa-eye"></i> Project
         </a>
         <a href="https://github.com/yaldram/sequelize-async-await-api" class="btn-dark">
